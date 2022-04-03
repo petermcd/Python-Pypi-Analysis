@@ -36,14 +36,14 @@ class Controller:
 
     def _process_next_package(self):
         """Process a new package."""
-        package = self._database.get_unprocessed_package()
-        try:
-            self._fetch_package_pypi_data(package)
-            self._database.set_package_status(
-                package=package, status=STATUS_PYPI_COMPLETE
-            )
-        except Exception:
-            self._database.set_package_status(package=package, status=STATUS_FAILED)
+        while package := self._database.get_unprocessed_package():
+            try:
+                self._fetch_package_pypi_data(package)
+                self._database.set_package_status(
+                    package=package, status=STATUS_PYPI_COMPLETE
+                )
+            except Exception:
+                self._database.set_package_status(package=package, status=STATUS_FAILED)
         self._done()
         sleep(randint(5, 10))
 
