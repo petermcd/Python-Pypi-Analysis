@@ -44,8 +44,8 @@ class Controller:
                 )
             except Exception:
                 self._database.set_package_status(package=package, status=STATUS_FAILED)
+            sleep(randint(5, 10))
         self._done()
-        sleep(randint(5, 10))
 
     def _identify_bug_count(self, package: Package):
         """
