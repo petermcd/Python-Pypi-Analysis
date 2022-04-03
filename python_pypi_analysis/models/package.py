@@ -1,4 +1,5 @@
 """Model for pypi packages."""
+from python_pypi_analysis.models.file import File
 
 
 class Package:
@@ -12,6 +13,7 @@ class Package:
         "_project_urls",
         "_download_urls",
         "_analysed_version",
+        "_files",
     ]
 
     def __init__(self, package_name: str, downloads: int = 0, database_id: int = 0):
@@ -20,8 +22,9 @@ class Package:
         self._downloads: int = downloads
         self._package_name: str = package_name
         self._project_urls: dict[str, str] = {}
-        self._download_urls: dict[str, str] = {}
+        self._download_urls: list[dict[str, str]] = []
         self._analysed_version: str = "0"
+        self._files: dict[str, File] = {}
 
     @property
     def database_id(self) -> int:
@@ -84,7 +87,7 @@ class Package:
         self._project_urls = urls
 
     @property
-    def download_urls(self) -> dict[str, str]:
+    def download_urls(self) -> list[dict[str, str]]:
         """
         Property for download URLs.
 
@@ -94,7 +97,7 @@ class Package:
         return self._download_urls
 
     @download_urls.setter
-    def download_urls(self, urls: dict[str, str]):
+    def download_urls(self, urls: list[dict[str, str]]):
         """
         Setter for download URLS.
 
@@ -122,3 +125,17 @@ class Package:
             version: version
         """
         self._analysed_version = version
+
+    def get_file(self, name: str) -> File:
+        """
+        Fetch the file object for the given file.
+
+        Args:
+            name: name of instance required
+
+        Returns:
+            Instance of File of the given name
+        """
+        if name not in self._files.keys():
+            self._files[name] = File(package=self, name=name)
+        return self._files[name]

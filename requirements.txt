@@ -1,4 +1,5 @@
 google-cloud-bigquery
 mariadb
 python-dotenv
+radon
 requests

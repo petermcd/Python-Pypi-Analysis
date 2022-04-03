@@ -9,7 +9,10 @@ from python_pypi_analysis.utilities.configuration import Configuration
 STATUS_READY = 0
 STATUS_IN_PROGRESS = 1
 STATUS_FAILED = 2
-STATUS_COMPLETE = 3
+STATUS_PYPI_COMPLETE = 3
+STATUS_CODE_ANALYSIS_IN_PROGRESS = 4
+STATUS_CODE_ANALYSIS_FAILED = 4
+STATUS_CODE_ANALYSIS_COMPLETE = 6
 
 
 class Database:
@@ -106,10 +109,14 @@ class Database:
         self._cursor.execute(update_package_sql, (package.version, package.database_id))
 
         insert_package_download_sql = "INSERT INTO package_download_urls (name, url, for_package) VALUES (?, ?, ?);"
-        for download_type, download_url in package.download_urls.items():
+        for download_details in package.download_urls:
             self._cursor.execute(
                 insert_package_download_sql,
-                (download_type, download_url, package.database_id),
+                (
+                    download_details["type"],
+                    download_details["url"],
+                    package.database_id,
+                ),
             )
 
         insert_package_url_sql = (
