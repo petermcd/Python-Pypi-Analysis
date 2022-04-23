@@ -122,10 +122,11 @@ class Database:
         insert_package_url_sql = (
             "INSERT INTO package_urls (name, url, for_package) VALUES (?, ?, ?);"
         )
-        for url_name, url in package.project_urls.items():
-            self._cursor.execute(
-                insert_package_url_sql, (url_name, url, package.database_id)
-            )
+        if package.project_urls:
+            for url_name, url in package.project_urls.items():
+                self._cursor.execute(
+                    insert_package_url_sql, (url_name, url, package.database_id)
+                )
 
         self._connection.commit()
         self._commit_required = False
