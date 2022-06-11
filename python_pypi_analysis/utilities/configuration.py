@@ -36,7 +36,7 @@ class Configuration:
             Database host
         """
         if not self._database_host:
-            self._database_host = getenv("DATABASE_HOST", "")
+            self._database_host = getenv("ANALYSIS_DATABASE_HOST", "")
         return self._database_host or ""
 
     @property
@@ -48,7 +48,7 @@ class Configuration:
             Database name
         """
         if not self._database_name:
-            self._database_name = getenv("DATABASE_NAME", "")
+            self._database_name = getenv("ANALYSIS_DATABASE_NAME", "")
         return self._database_name or ""
 
     @property
@@ -60,7 +60,7 @@ class Configuration:
             Database password
         """
         if not self._database_password:
-            self._database_password = getenv("DATABASE_PASSWORD", "")
+            self._database_password = getenv("ANALYSIS_DATABASE_PASSWORD", "")
         return self._database_password or ""
 
     @property
@@ -72,7 +72,7 @@ class Configuration:
             Database port defaulting to 3306
         """
         if not self._database_port:
-            self._database_port = int(getenv("DATABASE_PORT", 3306))
+            self._database_port = int(getenv("ANALYSIS_DATABASE_PORT", 3306))
         return self._database_port
 
     @property
@@ -84,7 +84,7 @@ class Configuration:
             Database username
         """
         if not self._database_username:
-            self._database_username = getenv("DATABASE_USERNAME", "")
+            self._database_username = getenv("ANALYSIS_DATABASE_USERNAME", "")
         return self._database_username or ""
 
     @classmethod
