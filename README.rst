@@ -20,16 +20,16 @@ directory for the application.
 
 .. code-block:: shell
 
-   DATABASE_USERNAME=username
-   DATABASE_PASSWORD=password
-   DATABASE_HOST=host
-   DATABASE_NAME=name
-   DATABASE_PORT=3306
+   ANALYSIS_DATABASE_HOST=host
+   ANALYSIS_DATABASE_NAME=name
+   ANALYSIS_DATABASE_USERNAME=username
+   ANALYSIS_DATABASE_PASSWORD=password
+   ANALYSIS_DATABASE_PORT=3306
 
 Environment Variables
 =====================================
 
-The configuration items that can be configued in the .env file can
+The configuration items that can be configured in the .env file can
 also be set as environment variables.
 
 *************************************
