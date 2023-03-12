@@ -1,4 +1,0 @@
-mariadb
-python-dotenv
-radon
-requests
